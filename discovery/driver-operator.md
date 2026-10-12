@@ -53,7 +53,8 @@ exceptions the driver should be able to **raise**, only while the train is stopp
 
 **What the driver needs to see (consume)**
 
-- Assigned journeys, including the crew on each journey (the guard).
+- Assigned journeys, from the crew assignments set by the Scheduler (plan) or the Network Controller
+  (today), including the crew on each journey (the guard).
 - Route and planned stops, with platform/station information.
 - Operational notices and instructions from the controller.
 - Disruptions on the route.

@@ -24,15 +24,17 @@ control, and seeing the same live arrival and departure information the passenge
 - **Platform allocation is separate, and not theirs.** Which train uses which platform is decided by
   the Network Controller, not the Station Master. Availability ("is this platform usable?") and
   allocation ("which train uses this platform?") are two different decisions and must not be confused.
+- **Out-of-use is verified before it is published.** A platform marked out of use is published only
+  after the Network Controller verifies it.
+- **Local display notices are station-scoped.** Local issues at the station — for example, a lift out
+  of order or a facility closure — are the Station Master's notices, shown on their own station's
+  displays only; a local notice affects no other station and not the network.
 - The station master needs **the same live arrival and departure information the passenger displays
   show**. They answer the same questions passengers ask, and should not be working from a different,
   staler picture.
 - The station master can maintain **basic station information for their own station only** — a small
   part of the role, and not a facilities or service-management feature.
-- **Station staff** support the station master with a read-only view of the same information, and
-  possibly the ability to report.
-- **Coverage is not uniform.** Small halts without a station master are covered by the nearest staffed
-  station or by the Controller.
+- **Station staff** support the station master with a read-only view of the same information.
 - Today all of this is verbal, radio and local knowledge: there is no structured way to mark a platform
   out of use or report a station incident, so the state of a station lives in people's heads and in
   ad-hoc calls.
@@ -42,8 +44,7 @@ control, and seeing the same live arrival and departure information the passenge
 **Assumed figures (illustrative — must be validated)**
 
 - The network is on the order of **~150 stations** and **~350 daily services**.
-- Typically **one station master per staffed station**, with a small number of unstaffed halts relying
-  on the nearest staffed station or on control.
+- Typically **one station master per station**.
 - On the order of **1–5 reportable station events per station per day** (overcrowding, security,
   medical, facility faults), varying widely by station and time of day.
 - Assume a meaningful share of station events (**~30–40%**) are never captured in any structured
@@ -69,6 +70,8 @@ local facts they should be able to **record or update**.
 **What the station master should be permitted to record or update (produce)**
 
 - **Platform availability** — mark a platform at their station out of use, or back in service.
+- **Local display notices** — raise notices about local issues at their station (for example, a lift
+  out of order or a facility closure), shown only on their own station's displays.
 - **Basic station information** — keep the basic details of their own station current, and only their
   own station. This is not a facilities or service-management feature.
 - **Local incident reports to the Controller** — overcrowding, security, a passenger medical emergency,
@@ -124,5 +127,4 @@ control and passenger awareness from an assumed ~5–10 minutes to under ~1 minu
 | **Network controllers / operations** | Cannot see local station conditions (overcrowding, security, medical) unless someone calls; the operational picture is missing the ground level; slower, inconsistent response. |
 | **Passenger messaging** | Cannot message accurately about station conditions it has not been told about. |
 | **Drivers, guards and onboard staff** | Arrive at a station to find it blocked or overcrowded, with no advance warning. |
-| **Small or unstaffed halts** | Depend on the nearest staffed station or on control, so coverage and information quality vary across the network. |
 | **The railway organisation** | No structured record of station incidents or platform availability; safety risk from an out-of-use platform; poor evidence for reporting and improvement. |

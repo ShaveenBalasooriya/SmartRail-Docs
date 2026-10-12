@@ -23,7 +23,7 @@ it in a timely, reliable form.
   with special passes meet the passenger inside the train carriage.
 - **Catering station staff** — the people who physically prepare and hand over orders — are the
   provider's frontline sub-stakeholder; they are the ones who need the train, platform, arrival and
-  order details in the moment.
+  order details in the moment. They work in the provider's own system and are **not SmartRail users**.
 - To do that, the provider needs a **minimum slice of railway information** — the service and route,
   the station, the platform, the scheduled and expected arrival, and any service change — plus the
   order and **just enough passenger detail to identify and deliver it correctly**.
@@ -36,11 +36,23 @@ it in a timely, reliable form.
   is the thing that matters most.
 - Food availability, menus and prices change on the provider's side, so the passenger-facing options
   depend on the provider publishing those changes through the integration.
-- Many parts of the ordering and fulfilment process are **undefined** today and have to be decided:
-  which stations support catering; when an order can be placed and how close to arrival it can change;
-  what happens when a train is delayed or the passenger misses the handover point; who may cancel; who
-  owns payment; who owns the authoritative menu; how availability changes are communicated; how orders
-  are tied to a passenger and a journey; and how successful handover is confirmed.
+- **Ordering window.** A collection station is eligible only if its live estimated arrival is at least
+  **45 minutes away** at the time of ordering.
+- **No cancellation or modification by the passenger.** Once the order is placed, the passenger cannot
+  cancel or change it (the same model as PickMe and Uber).
+- **Railway-caused failure.** SmartRail does not flag or act on orders. It relays journey status
+  changes — delay, cancellation, early termination, skipped stop, and platform or station change — to the
+  provider through the integration. The provider decides whether an order can still be fulfilled, and
+  cancels it as railway-caused if not; the passenger does not pay.
+- **Missed handover caused by the passenger.** If the passenger is not present or cannot be found, the
+  provider marks the order **"not picked up"**, and no refund is issued.
+- **Confirmation.** The passenger's app shows the order details with an **order ID or unique PIN**.
+  Catering staff verify it manually, then mark the order delivered.
+- **Payment.** Payment is **cash or card on delivery**, collected by the provider. SmartRail handles no
+  payments. Because SmartRail processes no payments, **card data stays out of scope** — a security
+  benefit.
+- **Identified risk: no-shows.** With payment on delivery, a passenger can order and not show up, and
+  the provider loses the food. This is a known issue on PickMe and Uber too.
 
 **Assumed figures (illustrative — must be validated)**
 
@@ -67,16 +79,18 @@ The provider integration spans two directions: the railway information the provi
 - The **journey state** — running, changed, cancelled, terminated early — because that decides whether
   the order can be fulfilled at all.
 - The **order**: items, order reference and current status.
-- **Just enough passenger detail to deliver correctly** — enough to identify the passenger and hand
-  over the order, and no more than the order requires.
+- **Just enough passenger detail to deliver correctly** — the passenger's **name, phone number and
+  order ID or PIN**, and nothing more. The phone number lets catering staff contact the passenger
+  directly to find them.
 
 **What the provider produces (produce)**
 
 - Its authoritative **menu, prices and availability**, and the changes to them, published for
   passengers to see.
 - Order **acceptance, preparation and fulfilment** against the journey.
-- **Order status updates** so the passenger can follow progress (accepted, preparing, on its way,
-  handed over).
+- **Order status updates** so the passenger can follow progress: **placed, accepted, rejected (by the
+  provider), preparing, on its way, handed over, not picked up (passenger-caused) and cancelled
+  (railway-caused)**.
 - **Handover to the passenger** by catering station staff — at the outlet, or inside the carriage where
   passes allow.
 - **Confirmation of successful handover**, and cancellation or failure where an order cannot be

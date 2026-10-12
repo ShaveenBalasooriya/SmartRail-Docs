@@ -25,7 +25,8 @@ Officer and Auditor.
 - **Plan versus instance.** The Scheduler edits the *template* of what the railway should do; the
   Network Controller edits what it *is* doing today. These are different data with different owners.
 - **Time-based handling.** The Network Controller acts immediately on anything inside its window (up to
-  24–48 hours ahead). Anything beyond that window becomes a handoff to the Scheduler.
+  24–48 hours ahead). Anything beyond that window becomes a handoff to the Scheduler. Once a journey
+  enters the Controller's window it belongs to the Controller, and the Scheduler can no longer edit it.
 - **Cause-based restriction.** A single recorded cause (for example, "Station X closed Mon–Thu") is
   captured once; the system identifies the affected journeys, a human decides the resolution, and the
   approved changes are published consistently everywhere.
@@ -56,12 +57,15 @@ Officer and Auditor.
   Officer's remit:
   - **Context and advice** — for example, "use the replacement bus from Platform 2" or "expect
     crowding on the next service".
-  - **Notices not tied to a journey** — planned works announced weeks ahead, strikes, weather warnings
-    and station facility closures.
+  - **Notices not tied to a journey** — planned works announced weeks ahead, strikes and weather
+    warnings. The Customer Information Officer handles network-level messaging coming from Central
+    Control; station-local notices belong to the Station Master.
   - **Sensitive incidents** — after a fatality or a security event the wording matters, and raw
     operational notes such as a controller's incident log must never be published as they stand.
   - **Languages** — messages need Sinhala, Tamil and English, and a human writes or checks these.
-  - **Corrections** — someone can pause or fix a wrong automatic message.
+  - **Corrections** — the Customer Information Officer can send additional messages and correct a wrong
+    message, but cannot pause or block automatic structured status changes (delay, cancel, platform
+    change, skip stop). These always publish.
 - **Audit everything.** Every role's actions are logged, including the admin's, and the logs cannot be
   changed.
 - **Scoped reporting.** Each role sees reports for its own area only; the Auditor sees everything. The
@@ -95,9 +99,9 @@ each role can act only in its own domain, and none can act in all of them.
 | Role | Owns | Can do | Cannot do |
 |---|---|---|---|
 | System Admin | Access | Manage users, roles and configuration; view all logs and data | Change operational or schedule data; edit or delete logs |
-| Scheduler | The plan | Stations, platforms, routes, trains, timetables, calendars, planned works, temporary date-limited changes; clear restrictions | Change a journey already running |
-| Network Controller | Today | Monitor trains, log incidents, delay, cancel, skip stop, terminate early, allocate and change platforms (up to 24–48h ahead), manage handoffs, clear restrictions | Change the timetable or reference data |
-| Customer Information Officer | Passenger messaging | Write advisories and notices; correct published messages | Change operational data |
+| Scheduler | The plan | Stations, platforms, routes, trains, timetables, calendars, planned works, temporary date-limited changes; assign crew (driver, guard) to journeys; clear restrictions | Change a journey once it enters the Controller's window — it belongs to the Controller |
+| Network Controller | Today | Monitor trains, log incidents, delay, cancel, skip stop, terminate early, allocate and change platforms and crew assignments (up to 24–48h ahead), manage handoffs, clear restrictions | Change the timetable or reference data |
+| Customer Information Officer | Passenger messaging | Write advisories and notices; send additional messages; correct published messages | Change operational data; pause or block automatic structured status changes |
 | Auditor | Oversight | Read-only access to logs and reports | Change anything |
 
 **What Central Control needs to see (consume)**
@@ -116,13 +120,15 @@ each role can act only in its own domain, and none can act in all of them.
 - **System Admin** — manage users, roles and configuration. No operational or schedule data; logs
   remain immutable.
 - **Scheduler** — change the plan: stations, platforms, routes, trains, timetables, calendars, planned
-  works and temporary date-limited changes; clear restrictions. Not a journey already running.
+  works and temporary date-limited changes; assign crew (driver, guard) to journeys; clear restrictions.
+  Not a journey once it is inside the Controller's window — it belongs to the Controller.
 - **Network Controller** — change today: monitor, log incidents, delay, cancel, skip stop, terminate
-  early, and allocate or change platforms within its 24–48h window; create and manage handoffs
-  (deadline, escalation, reassignment, logged fallback); clear restrictions. Not the timetable or
-  reference data.
+  early, and allocate or change platforms and crew assignments within its 24–48h window; create and
+  manage handoffs (deadline, escalation, reassignment, logged fallback); clear restrictions. Not the
+  timetable or reference data.
 - **Customer Information Officer** — write optional advisories attached to a disruption and
-  network-wide notices, and correct or pause published messages. Not operational data.
+  network-wide notices, send additional messages, and correct published messages. Not operational data,
+  and cannot pause or block automatic structured status changes.
 - **Auditor** — produce oversight reports by reading logs and data. Changes nothing.
 
 ### 5 Whys

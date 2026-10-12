@@ -31,11 +31,14 @@ trustworthy answer in the moment they need it.
 - Beyond information, passengers want to act on their journey. A clear example is **food ordering**:
   discovering the food options available on their route, ordering, and having the order delivered or
   collected at a suitable station during the journey.
-- For a food order to be of any use, the passenger needs to **track its progress** — accepted,
-  preparing, on its way, arrived — in the same way they need live information about their train.
+- For a food order to be of any use, the passenger needs to **track its progress** — placed, accepted,
+  rejected by the provider, preparing, on its way, handed over, not picked up, or cancelled — in the
+  same way they need live information about their train.
 - **Food ordering depends on the journey's real timing.** If a train is delayed or changed and the
   passenger is not told, the passenger and the provider fall out of step, so ordering only works on
   top of trustworthy live journey information.
+- **Live information is public; ordering needs an account.** Services, stations, live status and
+  disruptions are available with no account, while food ordering requires a signed-in account.
 - **Passengers move through areas of weak or intermittent connectivity.** Any passenger-facing channel
   must stay useful when the network drops — at minimum showing the last known information and making
   clear that it may be stale — rather than failing or blanking out.

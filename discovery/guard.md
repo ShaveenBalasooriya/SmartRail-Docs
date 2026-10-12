@@ -37,6 +37,9 @@ departure events.
   safety.
 - Weak connectivity on the move means any guard tool must tolerate losing and regaining network
   without losing reports.
+- **Offline behaviour.** If the guard's device is offline, departure confirmations and events are
+  stored locally and synced when connectivity returns, keeping the original timestamp. Until they sync,
+  the system shows estimated times.
 
 **Assumed figures (illustrative — must be validated)**
 
@@ -63,8 +66,7 @@ the guard should be able to **record or escalate**.
 - Timetable and timing points (scheduled vs actual).
 - Live operational notifications and instructions from control.
 - Current journey status and any known disruption on the route.
-- Passenger safety and accessibility information relevant to the stop (for example, assistance
-  requests).
+- Passenger safety and accessibility information relevant to the stop.
 
 **What the guard should be permitted to record or update (produce)**
 
