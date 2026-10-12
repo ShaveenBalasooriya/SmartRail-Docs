@@ -11,8 +11,8 @@ trustworthy answer in the moment they need it.
 
 **Qualitative**
 
-- Passengers currently rely on a mix of static station displays, PA announcements, printed
-  timetables, staff, and word of mouth. There is no passenger-facing real-time information channel.
+- **Assumption:** there is no passenger-facing real-time information channel today. Passengers rely on
+  a mix of static station displays, PA announcements, printed timetables, staff, and word of mouth.
 - The railway's operational data (schedules, running times, platform allocations, disruptions)
   largely *exists internally* but is **not exposed to passengers in real time**.
 - Disruption information reaches passengers late, inconsistently, or not at all — and often differs
@@ -23,8 +23,11 @@ trustworthy answer in the moment they need it.
   **Regular commuters** are affected mainly during peak times and disruptions.
 - Passengers with **accessibility needs** (visual, hearing, cognitive, mobility) are
   disproportionately affected by information that is only visual, only auditory, or only in one place.
+- **Accessibility is a non-functional requirement**, not a feature: every passenger-facing channel
+  must meet it, rather than accessibility being added on separately.
 - The information passengers value most: next train to a destination, live running status, platform,
-  delay/arrival estimates, and **what to do when something has gone wrong**.
+  delay/arrival estimates, **connections** (whether a connection can be made and what onward options
+  exist), and **what to do when something has gone wrong**.
 - Beyond information, passengers want to act on their journey. A clear example is **food ordering**:
   discovering the food options available on their route, ordering, and having the order delivered or
   collected at a suitable station during the journey.
@@ -33,6 +36,9 @@ trustworthy answer in the moment they need it.
 - **Food ordering depends on the journey's real timing.** If a train is delayed or changed and the
   passenger is not told, the passenger and the provider fall out of step, so ordering only works on
   top of trustworthy live journey information.
+- **Passengers move through areas of weak or intermittent connectivity.** Any passenger-facing channel
+  must stay useful when the network drops — at minimum showing the last known information and making
+  clear that it may be stale — rather than failing or blanking out.
 
 **Assumed figures (illustrative — must be validated)**
 
@@ -76,7 +82,8 @@ Passengers struggle to plan and complete their journeys when service and disrupt
 missing, delayed, or inconsistent, causing uncertainty, missed trains and connections, wasted time,
 and loss of trust in the railway. A successful solution would deliver accurate, real-time, consistent
 information across all passenger touchpoints — mobile, station displays, and terminals — **from a
-single source of truth**, targeting a rise in information satisfaction from an assumed ~45% to ≥80%
+single source of truth**, including clear guidance on **what to do when something has gone wrong**,
+targeting a rise in information satisfaction from an assumed ~45% to ≥80%
 and a ~30% reduction in information-related complaints.
 
 ## 2. Understanding the Impact
@@ -89,7 +96,7 @@ and a ~30% reduction in information-related complaints.
 | **Passengers ordering food** | Cannot discover or order food against their journey, or know whether their order will arrive; a service that could ease their journey is unavailable or unreliable. |
 | **Station staff** | Field constant "is my train on time / which platform" questions they cannot reliably answer; pulled away from safety and service duties. |
 | **Customer service / contact centre** | High volume of information and complaint contacts; repeated, avoidable queries; reputational pressure. |
-| **Train drivers & onboard staff** | Boarding confusion and passenger frustration transferred to them; they become the de-facto information source with no passenger-facing tools. |
+| **Train drivers, guards & onboard staff** | Boarding confusion and passenger frustration transferred to them; the guard and onboard staff carry the information burden with no passenger-facing tools. |
 | **Railway operations / controllers** | Disruption messaging must be repeated manually across channels; no reliable way to reach affected passengers; passenger confusion adds to operational load. |
-| **Food ordering service providers** | Cannot coordinate preparation or collection because they have no reliable journey/arrival data (a downstream dependency of the same root cause). |
+| **Food ordering service provider** | Cannot coordinate preparation or collection because they have no reliable journey/arrival data (a downstream dependency of the same root cause). |
 | **The railway organisation** | Lost revenue from abandoned trips; brand and trust damage ("unreliable / uninformative" reputation); regulatory and accessibility exposure; operational inefficiency; poor foundation for future digital services. |

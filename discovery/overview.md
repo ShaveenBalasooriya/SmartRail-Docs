@@ -31,4 +31,4 @@ every internal stakeholder. There is one file per role, and for each we complete
 | Guard | [guard.md](guard.md) | Accepted |
 | Station Master / Station Staff | [station-master.md](station-master.md) | Accepted |
 | Central Control (Administrative Controllers) | [central-control.md](central-control.md) | Accepted |
-| Food Ordering Service Providers | [food-ordering-providers.md](food-ordering-providers.md) | Accepted |
+| External Catering Provider | [food-ordering-providers.md](food-ordering-providers.md) | Accepted |

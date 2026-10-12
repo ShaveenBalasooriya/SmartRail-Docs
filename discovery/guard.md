@@ -27,6 +27,10 @@ departure events.
   the station; capturing it gives the live picture an honest, human-confirmed departure time.
 - Today that confirmation is verbal and visual only and is not captured as structured data, so the
   live picture must infer a departure rather than be told one.
+- **How times are known.** The guard's confirmation gives the actual **departure** time at each stop.
+  **Arrival** at a stop is not separately confirmed by a human; it is derived — for example, from the
+  previous confirmed departure plus the scheduled running time between the two stops. The guard
+  therefore remains the only human source of an actual time.
 - The guard also becomes a point of contact for passenger safety and information at stops, with no
   digital tooling to record or escalate what they see.
 - The guard operates under **safety and regulatory** duties; any tool must not distract from platform
@@ -54,7 +58,7 @@ the guard should be able to **record or escalate**.
 
 **What the guard needs to see (consume)**
 
-- Assigned duty/journey and shift roster; the train/unit and its formation.
+- Assigned journeys, including the crew on each journey (the driver).
 - Route, planned stops, platform and stopping pattern.
 - Timetable and timing points (scheduled vs actual).
 - Live operational notifications and instructions from control.

@@ -18,11 +18,17 @@ control, and seeing the same live arrival and departure information the passenge
 - The role is the station's **link to operations**: local conditions that control cannot see from the
   centre — overcrowding, security events, a passenger medical emergency, a facility failure — are
   reported up by the station master.
-- The station master **controls platform availability**: they know when a platform is blocked or out of
-  use, and they are the ones who would mark it out of use or back in service.
+- The station master **owns platform availability** — whether a platform at their station is usable.
+  They know when a platform is blocked or out of use, and they are the ones who would mark it out of
+  use or back in service.
+- **Platform allocation is separate, and not theirs.** Which train uses which platform is decided by
+  the Network Controller, not the Station Master. Availability ("is this platform usable?") and
+  allocation ("which train uses this platform?") are two different decisions and must not be confused.
 - The station master needs **the same live arrival and departure information the passenger displays
   show**. They answer the same questions passengers ask, and should not be working from a different,
   staler picture.
+- The station master can maintain **basic station information for their own station only** — a small
+  part of the role, and not a facilities or service-management feature.
 - **Station staff** support the station master with a read-only view of the same information, and
   possibly the ability to report.
 - **Coverage is not uniform.** Small halts without a station master are covered by the nearest staffed
@@ -52,16 +58,19 @@ local facts they should be able to **record or update**.
 
 - **Live arrivals and departures for their station** — the same information the passenger displays
   show.
-- The current status of each platform at their station: in use, out of use, or changed.
+- The current **availability** of each platform at their station: usable, out of use, or changed.
+- The **platform allocation** for each service (which train uses which platform), set by the Network
+  Controller.
 - The timetable and planned stopping pattern for their station.
 - Live operational notifications and instructions from control (delays, cancellations, diversions,
   platform changes).
-- The expected service and passenger load, to anticipate crowding.
 - The state of incidents and reports they have raised, and whether they are being handled.
 
 **What the station master should be permitted to record or update (produce)**
 
-- **Platform availability** — mark a platform out of use, or back in service.
+- **Platform availability** — mark a platform at their station out of use, or back in service.
+- **Basic station information** — keep the basic details of their own station current, and only their
+  own station. This is not a facilities or service-management feature.
 - **Local incident reports to the Controller** — overcrowding, security, a passenger medical emergency,
   a facility failure.
 
