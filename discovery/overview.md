@@ -29,6 +29,6 @@ every internal stakeholder. There is one file per role, and for each we complete
 | Passenger | [passenger.md](passenger.md) | Accepted |
 | Driver / Train Operator | [driver-operator.md](driver-operator.md) | Accepted |
 | Guard | [guard.md](guard.md) | Accepted |
-| Station Master / Station Staff | [station-master.md](station-master.md) | Accepted |
+| Station Master | [station-master.md](station-master.md) | Accepted |
 | Central Control (Administrative Controllers) | [central-control.md](central-control.md) | Accepted |
 | External Catering Provider | [food-ordering-providers.md](food-ordering-providers.md) | Accepted |

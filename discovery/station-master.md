@@ -34,7 +34,9 @@ control, and seeing the same live arrival and departure information the passenge
   staler picture.
 - The station master can maintain **basic station information for their own station only** — a small
   part of the role, and not a facilities or service-management feature.
-- **Station staff** support the station master with a read-only view of the same information.
+- **Station staff** get live information from the same public channels as passengers — station
+  displays, the terminal and the passenger app — and the Station Master relays internal information to
+  them.
 - Today all of this is verbal, radio and local knowledge: there is no structured way to mark a platform
   out of use or report a station incident, so the state of a station lives in people's heads and in
   ad-hoc calls.
@@ -113,7 +115,7 @@ record those local facts where they happen, causing control and passengers to wo
 station, delayed responses, and a station master answering the same questions as the displays but from
 staler information. A successful solution would let the station master mark platform availability and
 report local incidents to the Controller — while seeing the same live arrivals and departures the
-displays show, with a read-only view for station staff — targeting a rise in station events captured
+displays show — targeting a rise in station events captured
 in a structured system from an assumed ~60% to ≥95% and a fall in the time from a station event to
 control and passenger awareness from an assumed ~5–10 minutes to under ~1 minute.
 
@@ -122,7 +124,7 @@ control and passenger awareness from an assumed ~5–10 minutes to under ~1 minu
 | Stakeholder | How the problem affects them |
 |---|---|
 | **Station masters** (primary) | No structured way to mark a platform out of use or raise an incident; the station picture lives in their head and in phone calls; answer passengers from staler information than the displays; local knowledge is lost at shift handover. |
-| **Station staff** | Share the same gap with no shared view; field the same passenger questions; a read-only view would give them the same truth as the station master. |
+| **Station staff** | Rely on the public channels — station displays, the terminal and the passenger app — for live information, with the Station Master relaying internal information. |
 | **Passengers at the station** | Arrive to a platform that is out of use or crowding they were not warned about; information conflicts between what they see and what staff say. |
 | **Network controllers / operations** | Cannot see local station conditions (overcrowding, security, medical) unless someone calls; the operational picture is missing the ground level; slower, inconsistent response. |
 | **Passenger messaging** | Cannot message accurately about station conditions it has not been told about. |
