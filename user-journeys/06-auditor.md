@@ -4,7 +4,7 @@
 
 ## Context
 
-SmartRail MVP 1 is a single source of truth for live train running on a small network: two lines of five stations each, running in both directions and sharing one interchange station, nine stations in total, all loaded as seed data. A change is made once and reaches the passenger app, a station platform display, the crew app and an external catering provider, each copy carrying a timestamp and a provenance label; every staff change is audited and only possible for the right role. Wasantha is the Auditor and works in the operations web with read-only access, viewing the audit record; he has no operational surface and can change nothing. The core pain addressed is that he cannot prove the record wasn't changed, and that he has no evidence roles stayed in their lanes. His assurance depends on every other role writing to the audit record — Scheduler and Network Controller changes, Guard departure logs, Driver notice acknowledgements and System Admin account actions — and on the server refusing and recording wrong-role writes.
+SmartRail MVP 1 is a single source of truth for live train running on a small network: two lines of five stations each, running in both directions and sharing one interchange station, nine stations in total. The network and its timetable are loaded as seed data, and each day's journeys are generated from the timetable. A change is made once and reaches the passenger app, a station platform display, the Guard's app and an external catering provider, each copy carrying a timestamp and a provenance label; every staff change is audited and only possible for the right role. Wasantha is the Auditor and works in the operations web with read-only access, viewing the audit record; he has no operational surface and can change nothing. The core pain addressed is that he cannot prove the record wasn't changed, and that he has no evidence roles stayed in their lanes. His assurance depends on every other staff role writing to the audit record — Network Controller changes and Guard departure logs — and on the server refusing and recording wrong-role writes, including his own.
 
 ## Key terms
 
@@ -16,7 +16,7 @@ SmartRail MVP 1 is a single source of truth for live train running on a small ne
 
 ## End-to-end scenarios this role takes part in
 
-**Separation of duties denials** — a Scheduler's edit to a journey inside the 24-hour window is rejected by the API and a Guard token attempting to publish a disruption gets 403; both denials appear in the audit record with the actor, role and timestamp.
+**Separation of duties denials** — a Guard token attempting to publish a disruption and an Auditor token attempting any change both get 403; both denials appear in the audit record with the actor, role and timestamp.
 
 **Wrong cancellation corrected** — the Network Controller cancels a journey by mistake and then corrects it; the record shows the cancellation and its correction, linked, with the original unchanged.
 
@@ -35,7 +35,7 @@ SmartRail MVP 1 is a single source of truth for live train running on a small ne
 ### J2 — Check a separation-of-duties breach attempt (end-to-end scenario: Separation of duties denials)
 
 1. Filters for denied attempts in a period.
-2. Sees a Scheduler's in-window edit and a Guard's attempted publish, both denied with role and timestamp.
+2. Sees a Guard's attempted publish and an Auditor's attempted change, both denied with role and timestamp.
 
 ### J3 — Trace a correction (end-to-end scenario: Wrong cancellation corrected)
 
@@ -52,7 +52,7 @@ SmartRail MVP 1 is a single source of truth for live train running on a small ne
 
 ### AUD-01 Read the full audit — Must
 As an Auditor, I want a read-only list of every staff state change, so that I can see what happened across all roles.
-- Includes Scheduler, Controller, Guard, Driver acknowledgements and System Admin actions.
+- Includes Network Controller changes and corrections, and Guard departure logs.
 **Delivers:** a read-only view of every staff change
 
 ### AUD-02 Filter — Must

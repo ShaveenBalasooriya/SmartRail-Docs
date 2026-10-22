@@ -4,7 +4,7 @@
 
 ## Context
 
-SmartRail MVP 1 is a single source of truth for live train running on a small network: two lines of five stations each, running in both directions and sharing one interchange station, nine stations in total, all loaded as seed data. A change is made once and reaches the passenger app, a station platform display, the crew app and an external catering provider, each copy carrying a timestamp and a provenance label; every staff change is audited and only possible for the right role. RailBites is that external catering provider: a separate system that stays separate, connecting to SmartRail over an API authenticated with an API key, with a small simulated provider app to show the integration working. RailBites uses the data to time its preparation and handovers at its station; it owns nothing inside SmartRail and cannot change anything there. The core pain addressed is acting on late, incomplete journey data, changes that are not pushed, and being unable to attribute a railway-caused failure. What it receives depends on the Scheduler's services becoming daily journeys, the Guard's departure logs driving live progress, and the Network Controller's published changes and corrections being distributed to it.
+SmartRail MVP 1 is a single source of truth for live train running on a small network: two lines of five stations each, running in both directions and sharing one interchange station, nine stations in total. The network and its timetable are loaded as seed data, and each day's journeys are generated from the timetable. A change is made once and reaches the passenger app, a station platform display, the Guard's app and an external catering provider, each copy carrying a timestamp and a provenance label; every staff change is audited and only possible for the right role. RailBites is that external catering provider: a separate system that stays separate, connecting to SmartRail over an API authenticated with an API key, with a small simulated provider app to show the integration working. RailBites uses the data to time its preparation and handovers at its station; it owns nothing inside SmartRail and cannot change anything there. The core pain addressed is acting on late, incomplete journey data, changes that are not pushed, and being unable to attribute a railway-caused failure. What it receives depends on the seeded timetable becoming daily journeys, the Guard's departure logs driving live progress, and the Network Controller's published changes and corrections being distributed to it.
 
 The "user" here is RailBites' kitchen team working through their system, so the stories below are written for the provider as a system and for its staff.
 
@@ -17,10 +17,12 @@ The "user" here is RailBites' kitchen team working through their system, so the 
 - **Provenance label** — the marker on a published change saying that it was automatically published, with its published time.
 - **Last updated / freshness** — the timestamp on each record showing how current it is.
 - **Correction** — a new event that references the original change and leaves it in place.
-- **Operational journey** — a daily instance of a scheduled service, generated from the service the Scheduler created.
+- **Operational journey** — a daily instance of a timetabled service, generated each day from the seeded timetable.
 - **Data classification** — the rule that the provider receives railway operational data only: no passenger personal data is shared with it, and none enters audit or diagnostic logs.
 
 ## End-to-end scenarios this role takes part in
+
+**Delay reaches every channel** — the Network Controller publishes a delay on a running journey; expected times at every later stop update in the passenger app, the station display and the Guard's app, and the simulated catering provider receives the event.
 
 **Platform change everywhere** — the Network Controller publishes a platform change; the passenger app and the station display show it with its time and provenance label, and the simulated catering provider receives it as a status-change event.
 
@@ -34,7 +36,7 @@ The "user" here is RailBites' kitchen team working through their system, so the 
 
 | # | Stage | Provider does | SmartRail responds | Pain addressed |
 |---|---|---|---|---|
-| 1 | Credential | Receives an API key **[A: issuer TBC]** | Key scoped to provider endpoints only | Unstructured data access |
+| 1 | Credential | Receives an API key, loaded as seed data **[A]** | Key scoped to provider endpoints only | Unstructured data access |
 | 2 | Pull reference | Requests stations and platforms | Station list with platforms | — |
 | 3 | Subscribe | Registers a webhook URL | Subscription active | Changes not pushed |
 
@@ -109,24 +111,16 @@ As a catering provider, I want SmartRail to retry failed deliveries, so that a b
 As a catering provider, I want corrections pushed with a reference to the original event, so that a wrong cancellation doesn't cost me an order.
 **Delivers:** corrections that reference the original event
 
-### CAT-10 Signed deliveries — Should **[A]**
-As a catering provider, I want webhook payloads signed, so that I can reject spoofed events.
-**Delivers:** signed webhook payloads
-
-### CAT-11 No passenger data — Must
+### CAT-10 No passenger data — Must
 As a catering provider, I want to receive railway data only, so that I hold no passenger personal data in MVP 1.
 **Delivers:** railway data only, with no passenger data
 
-### CAT-12 Rate limits — Must
+### CAT-11 Rate limits — Must
 As SmartRail, I want provider endpoints rate-limited, so that one client can't degrade the service.
 - Over-limit requests → 429.
 **Delivers:** rate-limited provider endpoints
 
-### CAT-13 Simulated provider app — Must
+### CAT-12 Simulated provider app — Must
 As the provider's kitchen team, I want a screen listing incoming journeys and live changes, so that I can see what to prepare and when.
 - Shows journeys with expected arrival, platform, status and received events in real time.
 **Delivers:** a simulated kitchen screen showing journeys and live changes
-
-### CAT-14 Menu feed with prep time — Could (optional in MVP 1)
-As a catering provider, I want to publish menu items with preparation time, so that later ordering can gate on it.
-**Delivers:** an optional menu feed carrying preparation times
